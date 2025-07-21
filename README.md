@@ -1,1 +1,0 @@
-# Employee-Earnings-Calculator
