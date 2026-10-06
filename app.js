@@ -67,8 +67,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial Trigger
     updateInputDisplay();
-    initCharts();
     runPrediction();
+    try {
+        initCharts();
+        runPrediction(); // Update charts after init
+    } catch (err) {
+        console.warn('Charts init warning:', err);
+    }
     setupBatchProcessor();
 
     // --- Input Display Updater ---
@@ -245,9 +250,13 @@ document.addEventListener('DOMContentLoaded', () => {
         populateDrivers(result.attributions, curr);
 
         // Update Charts & Optimizer Tips
-        updateWaterfallChart(result.attributions, curr);
-        updateTrajectoryChart(inputs, curr);
-        updateRadarChart(inputs);
+        try {
+            updateWaterfallChart(result.attributions, curr);
+            updateTrajectoryChart(inputs, curr);
+            updateRadarChart(inputs);
+        } catch (chartErr) {
+            console.warn('Chart update notice:', chartErr);
+        }
         updateOptimizerTips(inputs, result, curr);
     }
 
