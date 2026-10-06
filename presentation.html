@@ -193,6 +193,58 @@
             color: var(--text-muted);
         }
 
+        /* Results Box Styling */
+        .results-hero-box {
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .res-metric {
+            text-align: center;
+        }
+
+        .res-metric .num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--secondary);
+            display: block;
+        }
+
+        .res-metric .lbl {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .results-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .res-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            font-size: 0.9rem;
+        }
+
+        .res-card h4 {
+            color: var(--primary);
+            font-size: 0.98rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
         /* Slide Footer & Controls */
         .slide-footer {
             display: flex;
@@ -319,7 +371,7 @@
         <div class="slide">
             <div class="slide-header">
                 <div class="slide-title"><i class="fa-solid fa-building-columns"></i> Organization & Program Background</div>
-                <span class="slide-num">Slide 02 / 12</span>
+                <span class="slide-num">Slide 02 / 13</span>
             </div>
             <div class="slide-body">
                 <h3>Collaborating Bodies</h3>
@@ -344,12 +396,12 @@
         <div class="slide">
             <div class="slide-header">
                 <div class="slide-title"><i class="fa-solid fa-star"></i> Key Features & Core Modules</div>
-                <span class="slide-num">Slide 03 / 12</span>
+                <span class="slide-num">Slide 03 / 13</span>
             </div>
             <div class="slide-body">
                 <ul>
                     <li><span class="highlight-text">Interactive ML Predictor</span>: Dynamic slider and dropdown controls with instant prediction updates (< 15 ms latency).</li>
-                    <li><span class="highlight-text">SHAP Feature Attribution</span>: Visual breakdown showing dollar contributions (+) or deductions (-) relative to the $24,000 baseline.</li>
+                    <li><span class="highlight-text">SHAP Feature Attribution</span>: Visual breakdown showing dollar contributions (+) or deductions (-) relative to the baseline.</li>
                     <li><span class="highlight-text">Career Growth Optimizer</span>: Smart recommendations engine providing actionable advice to boost earning potential.</li>
                     <li><span class="highlight-text">Batch CSV Processing</span>: Bulk upload employee records via drag-and-drop CSV parser with downloadable results.</li>
                     <li><span class="highlight-text">Multi-Currency Converter</span>: Live currency conversion supporting USD ($), EUR (€), GBP (£), and INR (₹).</li>
@@ -365,7 +417,7 @@
         <div class="slide">
             <div class="slide-header">
                 <div class="slide-title"><i class="fa-solid fa-diagram-project"></i> Machine Learning Pipeline & Data</div>
-                <span class="slide-num">Slide 04 / 12</span>
+                <span class="slide-num">Slide 04 / 13</span>
             </div>
             <div class="slide-body">
                 <h3>Pipeline Stages</h3>
@@ -386,7 +438,7 @@
         <div class="slide">
             <div class="slide-header">
                 <div class="slide-title"><i class="fa-solid fa-chart-line"></i> Model Performance & Results</div>
-                <span class="slide-num">Slide 05 / 12</span>
+                <span class="slide-num">Slide 05 / 13</span>
             </div>
             <div class="slide-body">
                 <h3>Algorithm: Gradient Boosting / XGBoost Regressor</h3>
@@ -415,21 +467,46 @@
             </div>
         </div>
 
-        <!-- Slide 6 -->
+        <!-- Slide 6: NEW - Live System Results Showcase -->
         <div class="slide">
             <div class="slide-header">
-                <div class="slide-title"><i class="fa-solid fa-lightbulb"></i> Explainable AI & SHAP Attribution</div>
-                <span class="slide-num">Slide 06 / 12</span>
+                <div class="slide-title"><i class="fa-solid fa-desktop"></i> Live System Test Results & Output</div>
+                <span class="slide-num">Slide 06 / 13</span>
             </div>
             <div class="slide-body">
-                <h3>Monetary Feature Contribution Breakdown</h3>
-                <ul>
-                    <li><span class="highlight-text">Baseline Market Salary</span>: Fixed reference benchmark set at <strong style="color:#10b981">$24,000</strong>.</li>
-                    <li><span class="highlight-text">Education Multiplier</span>: Bachelor's (+$14k), Master's (+$26k), Doctorate (+$40k), Professional (+$48k).</li>
-                    <li><span class="highlight-text">Occupation Level</span>: Software Eng / AI (+$22k - $25k), Management (+$28k), Finance (+$24k).</li>
-                    <li><span class="highlight-text">Experience Trajectory</span>: Logarithmic curve accounting for initial rapid learning scaling and post-15-year plateauing.</li>
-                    <li><span class="highlight-text">Regional Market Tier</span>: Tier 1 Hub (+18%), Tier 2 (+2%), Tier 3 (-12%).</li>
-                </ul>
+                <div class="results-hero-box">
+                    <div class="res-metric">
+                        <span class="num">₹ 13,555,746 / yr</span>
+                        <span class="lbl">Estimated Annual Earnings (INR ₹)</span>
+                    </div>
+                    <div class="res-metric">
+                        <span class="num">₹ 1,129,646 / mo</span>
+                        <span class="lbl">Monthly Take-Home</span>
+                    </div>
+                    <div class="res-metric">
+                        <span class="num">₹ 6,517.19 / hr</span>
+                        <span class="lbl">Hourly Rate Equiv.</span>
+                    </div>
+                </div>
+
+                <div class="results-details-grid">
+                    <div class="res-card">
+                        <h4><i class="fa-solid fa-user-check"></i> Test Profile Input Parameters</h4>
+                        <p>• <strong>Age / Exp:</strong> 20 yrs old | 2 yrs Experience</p>
+                        <p>• <strong>Education:</strong> Master's Degree</p>
+                        <p>• <strong>Occupation:</strong> Data Science & AI / ML</p>
+                        <p>• <strong>Work Mode / Size:</strong> Fully Remote | Mid-Size</p>
+                        <p>• <strong>Market Benchmark:</strong> Global Remote Benchmark</p>
+                    </div>
+
+                    <div class="res-card">
+                        <h4><i class="fa-solid fa-chart-pie"></i> Model Confidence & Percentiles</h4>
+                        <p>• <strong>95% Confidence Min:</strong> ₹ 11,115,712</p>
+                        <p>• <strong>95% Confidence Max:</strong> ₹ 16,538,010</p>
+                        <p>• <strong>Earning Percentile:</strong> Top 21% Tier</p>
+                        <p>• <strong>Key Driver Impact:</strong> Occupation Level (+₹4,008,000)</p>
+                    </div>
+                </div>
             </div>
             <div class="slide-footer">
                 <span>Student: Sanjana Chirutha (STU: STU6817962b86d921746376235)</span>
@@ -440,8 +517,30 @@
         <!-- Slide 7 -->
         <div class="slide">
             <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-lightbulb"></i> Explainable AI & SHAP Attribution</div>
+                <span class="slide-num">Slide 07 / 13</span>
+            </div>
+            <div class="slide-body">
+                <h3>Monetary Feature Contribution Breakdown</h3>
+                <ul>
+                    <li><span class="highlight-text">Baseline Market Salary</span>: Reference market benchmark.</li>
+                    <li><span class="highlight-text">Education Multiplier</span>: Bachelor's, Master's, Doctorate, Professional degree boosts.</li>
+                    <li><span class="highlight-text">Occupation Level</span>: Software Eng / AI, Management, Finance tier adjustments.</li>
+                    <li><span class="highlight-text">Experience Trajectory</span>: Logarithmic curve accounting for initial rapid learning scaling and post-15-year plateauing.</li>
+                    <li><span class="highlight-text">Regional Market Tier</span>: Tier 1 Hub (+18%), Tier 2 (+2%), Tier 3 (-12%).</li>
+                </ul>
+            </div>
+            <div class="slide-footer">
+                <span>Student: Sanjana Chirutha (STU: STU6817962b86d921746376235)</span>
+                <span>Edunet Foundation | AICTE | IBM SkillsBuild</span>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+            <div class="slide-header">
                 <div class="slide-title"><i class="fa-solid fa-code"></i> Tech Stack & Implementation</div>
-                <span class="slide-num">Slide 07 / 12</span>
+                <span class="slide-num">Slide 08 / 13</span>
             </div>
             <div class="slide-body">
                 <ul>
@@ -456,11 +555,11 @@
             </div>
         </div>
 
-        <!-- Slide 8 -->
+        <!-- Slide 9 -->
         <div class="slide">
             <div class="slide-header">
                 <div class="slide-title"><i class="fa-solid fa-palette"></i> User Interface Design (Glassmorphism)</div>
-                <span class="slide-num">Slide 08 / 12</span>
+                <span class="slide-num">Slide 09 / 13</span>
             </div>
             <div class="slide-body">
                 <ul>
@@ -475,11 +574,11 @@
             </div>
         </div>
 
-        <!-- Slide 9 -->
+        <!-- Slide 10 -->
         <div class="slide">
             <div class="slide-header">
                 <div class="slide-title"><i class="fa-solid fa-file-csv"></i> Batch CSV Prediction Engine</div>
-                <span class="slide-num">Slide 09 / 12</span>
+                <span class="slide-num">Slide 10 / 13</span>
             </div>
             <div class="slide-body">
                 <ul>
@@ -494,11 +593,11 @@
             </div>
         </div>
 
-        <!-- Slide 10 -->
+        <!-- Slide 11 -->
         <div class="slide">
             <div class="slide-header">
                 <div class="slide-title"><i class="fa-solid fa-wrench"></i> Engineering Challenges & Solutions</div>
-                <span class="slide-num">Slide 10 / 12</span>
+                <span class="slide-num">Slide 11 / 13</span>
             </div>
             <div class="slide-body">
                 <ul>
@@ -513,11 +612,11 @@
             </div>
         </div>
 
-        <!-- Slide 11 -->
+        <!-- Slide 12 -->
         <div class="slide">
             <div class="slide-header">
                 <div class="slide-title"><i class="fa-solid fa-graduation-cap"></i> Internship Key Outcomes</div>
-                <span class="slide-num">Slide 11 / 12</span>
+                <span class="slide-num">Slide 12 / 13</span>
             </div>
             <div class="slide-body">
                 <ul>
@@ -532,7 +631,7 @@
             </div>
         </div>
 
-        <!-- Slide 12 -->
+        <!-- Slide 13 -->
         <div class="slide">
             <div class="title-slide-content">
                 <div class="org-header-badges" style="margin-bottom: 0.5rem;">
@@ -560,7 +659,7 @@
     <!-- Controls Bar -->
     <div class="controls">
         <button class="btn-ctrl" id="prev-btn"><i class="fa-solid fa-chevron-left"></i> Previous</button>
-        <span id="slide-indicator" style="align-self: center; font-weight: 700; color: #a5b4fc;">Slide 1 / 12</span>
+        <span id="slide-indicator" style="align-self: center; font-weight: 700; color: #a5b4fc;">Slide 1 / 13</span>
         <button class="btn-ctrl" id="next-btn">Next <i class="fa-solid fa-chevron-right"></i></button>
     </div>
 
