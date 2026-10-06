@@ -1,7 +1,7 @@
 """
-Script to generate PowerPoint Presentation (.pptx) for Sanjana Chirutha's Internship Project
+Script to generate PowerPoint Presentation (.pptx) matching exact theme of AICTE & Edunet Foundation Certificate
 Organisations: Edunet Foundation | AICTE | IBM SkillsBuild
-Project: Employee Earnings Calculator (ML-Powered Salary Prediction Engine)
+Student: Sanjana Chirutha (STU ID: STU6817962b86d921746376235)
 """
 
 from pptx import Presentation
@@ -15,38 +15,49 @@ def create_deck():
     prs.slide_width = Inches(13.333)
     prs.slide_height = Inches(7.5)
 
-    # Color Palette
-    COLOR_BG = RGBColor(9, 13, 22)        # #090d16
-    COLOR_CARD = RGBColor(21, 32, 54)     # #152036
-    COLOR_PRIMARY = RGBColor(99, 102, 241) # #6366f1
-    COLOR_ACCENT = RGBColor(16, 185, 129) # #10b981
-    COLOR_TEXT = RGBColor(248, 250, 252)  # #f8fafc
-    COLOR_MUTED = RGBColor(148, 163, 184) # #94a3b8
+    # Color Palette matching AICTE/Edunet Certificate PDF
+    COLOR_BG = RGBColor(248, 250, 252)       # Light slate #f8fafc
+    COLOR_CARD = RGBColor(241, 245, 249)     # Soft blue-gray #f1f5f9
+    COLOR_PRIMARY = RGBColor(30, 58, 138)    # Deep Navy Blue #1e3a8a
+    COLOR_SECONDARY = RGBColor(2, 132, 199)  # Sky Blue #0284c7
+    COLOR_ACCENT = RGBColor(22, 163, 74)     # Emerald Green #16a34a
+    COLOR_TEXT = RGBColor(15, 23, 42)        # Dark Slate #0f172a
+    COLOR_MUTED = RGBColor(71, 85, 105)      # Slate Muted #475569
 
     blank_layout = prs.slide_layouts[6]
 
     def add_base_slide(title_text="", slide_num_str=""):
         slide = prs.slides.add_slide(blank_layout)
         
-        # Background shape
+        # Background
         bg = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, prs.slide_width, prs.slide_height)
         bg.fill.solid()
         bg.fill.fore_color.rgb = COLOR_BG
         bg.line.fill.background()
 
+        # Left Margin Accent Bar (Matching Certificate Left Decorative Bar)
+        margin_bar = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, Inches(0.4), prs.slide_height)
+        margin_bar.fill.solid()
+        margin_bar.fill.fore_color.rgb = COLOR_SECONDARY
+        margin_bar.line.fill.background()
+
+        # Bottom Bar
+        bbar = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.4), Inches(7.2), Inches(12.933), Inches(0.3))
+        bbar.fill.solid()
+        bbar.fill.fore_color.rgb = COLOR_PRIMARY
+        bbar.line.fill.background()
+
         if title_text:
-            # Header Box
-            header_box = slide.shapes.add_textbox(Inches(0.8), Inches(0.4), Inches(11.7), Inches(0.8))
+            header_box = slide.shapes.add_textbox(Inches(0.8), Inches(0.4), Inches(10.5), Inches(0.8))
             tf = header_box.text_frame
             tf.word_wrap = True
             p = tf.paragraphs[0]
             p.text = title_text
-            p.font.name = "Arial"
+            p.font.name = "Helvetica"
             p.font.size = Pt(26)
             p.font.bold = True
-            p.font.color.rgb = COLOR_TEXT
+            p.font.color.rgb = COLOR_PRIMARY
 
-            # Subheader line / badge
             if slide_num_str:
                 num_box = slide.shapes.add_textbox(Inches(10.5), Inches(0.4), Inches(2.0), Inches(0.5))
                 np = num_box.text_frame.paragraphs[0]
@@ -54,14 +65,14 @@ def create_deck():
                 np.alignment = PP_ALIGN.RIGHT
                 np.font.size = Pt(13)
                 np.font.bold = True
-                np.font.color.rgb = COLOR_PRIMARY
+                np.font.color.rgb = COLOR_SECONDARY
 
-        # Footer
-        footer_box = slide.shapes.add_textbox(Inches(0.8), Inches(6.9), Inches(11.7), Inches(0.4))
+        # Footer Text
+        footer_box = slide.shapes.add_textbox(Inches(0.8), Inches(7.22), Inches(11.7), Inches(0.25))
         fp = footer_box.text_frame.paragraphs[0]
         fp.text = "Sanjana Chirutha (STU ID: STU6817962b86d921746376235)  |  Edunet Foundation  |  AICTE  |  IBM SkillsBuild"
         fp.font.size = Pt(10)
-        fp.font.color.rgb = COLOR_MUTED
+        fp.font.color.rgb = RGBColor(255, 255, 255)
 
         return slide
 
@@ -69,100 +80,109 @@ def create_deck():
         card = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, left, top, width, height)
         card.fill.solid()
         card.fill.fore_color.rgb = bg_color
-        card.line.color.rgb = RGBColor(255, 255, 255)
+        card.line.color.rgb = RGBColor(203, 213, 225)
         return card
 
     # =========================================================================
-    # Slide 1: Title Slide
+    # Slide 1: Title & Certificate Cover Slide
     # =========================================================================
     s1 = add_base_slide()
-    
-    # Title Box
-    tbox = s1.shapes.add_textbox(Inches(1.0), Inches(1.2), Inches(11.333), Inches(2.2))
+
+    # Header Org Banner
+    ob = s1.shapes.add_textbox(Inches(0.8), Inches(0.4), Inches(11.7), Inches(0.8))
+    ot = ob.text_frame
+    op = ot.paragraphs[0]
+    op.text = "edunet foundation   |   AICTE   |   IBM SkillsBuild"
+    op.font.size = Pt(14)
+    op.font.bold = True
+    op.font.color.rgb = COLOR_SECONDARY
+    op.alignment = PP_ALIGN.CENTER
+
+    tbox = s1.shapes.add_textbox(Inches(0.8), Inches(1.2), Inches(11.7), Inches(2.0))
     tf1 = tbox.text_frame
     p1 = tf1.paragraphs[0]
-    p1.text = "Employee Earnings Calculator"
-    p1.font.size = Pt(40)
+    p1.text = "Certificate of Completion & Internship Project"
+    p1.font.size = Pt(32)
     p1.font.bold = True
     p1.font.color.rgb = COLOR_PRIMARY
     p1.alignment = PP_ALIGN.CENTER
 
     p2 = tf1.add_paragraph()
-    p2.text = "Predictive Salary Intelligence System Powered by Machine Learning"
+    p2.text = "Employee Earnings Calculator (ML-Powered Salary Intelligence)"
     p2.font.size = Pt(20)
     p2.font.color.rgb = COLOR_MUTED
     p2.alignment = PP_ALIGN.CENTER
 
-    # Credentials Cards
-    c1 = add_card(s1, Inches(1.5), Inches(3.6), Inches(4.8), Inches(2.6))
-    tb_c1 = s1.shapes.add_textbox(Inches(1.7), Inches(3.8), Inches(4.4), Inches(2.2))
+    # Cards
+    c1 = add_card(s1, Inches(1.2), Inches(3.4), Inches(5.2), Inches(3.2))
+    tb_c1 = s1.shapes.add_textbox(Inches(1.4), Inches(3.6), Inches(4.8), Inches(2.8))
     t1 = tb_c1.text_frame
     t1.word_wrap = True
-    
+
     def add_kv(tf, k, v):
         p = tf.add_paragraph() if tf.paragraphs[0].text else tf.paragraphs[0]
         run1 = p.add_run()
         run1.text = f"{k}: "
         run1.font.bold = True
-        run1.font.size = Pt(14)
+        run1.font.size = Pt(13)
         run1.font.color.rgb = COLOR_TEXT
         
         run2 = p.add_run()
         run2.text = v
-        run2.font.size = Pt(14)
+        run2.font.size = Pt(13)
         run2.font.color.rgb = COLOR_PRIMARY
 
     add_kv(t1, "Student Name", "Sanjana Chirutha")
     add_kv(t1, "Student STU ID", "STU6817962b86d921746376235")
-    add_kv(t1, "Domain", "AI & Machine Learning")
+    add_kv(t1, "Program", "6 Weeks Virtual Internship on AI & ML")
     add_kv(t1, "Internship Period", "18/06/2025 – 30/07/2025")
 
-    c2 = add_card(s1, Inches(7.0), Inches(3.6), Inches(4.8), Inches(2.6))
-    tb_c2 = s1.shapes.add_textbox(Inches(7.2), Inches(3.8), Inches(4.4), Inches(2.2))
+    c2 = add_card(s1, Inches(6.8), Inches(3.4), Inches(5.2), Inches(3.2))
+    tb_c2 = s1.shapes.add_textbox(Inches(7.0), Inches(3.6), Inches(4.8), Inches(2.8))
     t2 = tb_c2.text_frame
     t2.word_wrap = True
     add_kv(t2, "Implementing Org", "Edunet Foundation")
-    add_kv(t2, "Collaborating Org", "AICTE")
+    add_kv(t2, "Collaborator", "AICTE")
     add_kv(t2, "Technology Partner", "IBM SkillsBuild")
-    add_kv(t2, "GitHub Repo", "github.com/Sanjana-Chirutha")
+    add_kv(t2, "Signatory Chairman", "Nagesh Singh (Edunet Foundation)")
 
     # =========================================================================
-    # Slide 2: Organization & Background
+    # Slide 2: Organization Overview
     # =========================================================================
-    s2 = add_base_slide("Organization & Program Background", "Slide 02/13")
+    s2 = add_base_slide("Organization & Program Overview", "Slide 02/13")
     
-    c_s2_1 = add_card(s2, Inches(0.8), Inches(1.5), Inches(5.6), Inches(4.8))
-    tb_s2_1 = s2.shapes.add_textbox(Inches(1.0), Inches(1.7), Inches(5.2), Inches(4.4))
+    c_s2_1 = add_card(s2, Inches(0.8), Inches(1.5), Inches(5.6), Inches(5.2))
+    tb_s2_1 = s2.shapes.add_textbox(Inches(1.0), Inches(1.7), Inches(5.2), Inches(4.8))
     t_s2_1 = tb_s2_1.text_frame
     t_s2_1.word_wrap = True
     
     p = t_s2_1.paragraphs[0]
-    p.text = "Collaborating Organizations"
+    p.text = "Collaborating Bodies"
     p.font.size = Pt(20)
     p.font.bold = True
-    p.font.color.rgb = COLOR_ACCENT
+    p.font.color.rgb = COLOR_PRIMARY
 
     bullet_points_1 = [
-        "Edunet Foundation: Primary implementing organization fostering technical skills and digital education excellence.",
-        "AICTE (All India Council for Technical Education): Statutory body guiding national technical curriculum standards.",
-        "IBM SkillsBuild: Industry partner providing practical AI & ML learning workflows and credentials."
+        "Edunet Foundation: Primary implementing organization leading youth digital skill development.",
+        "AICTE (All India Council for Technical Education): Statutory body enabling national technical education standards.",
+        "IBM SkillsBuild: Industry technology partner providing practical AI & ML learning workflows."
     ]
     for bp in bullet_points_1:
         p = t_s2_1.add_paragraph()
         p.text = f"• {bp}"
-        p.font.size = Pt(14)
-        p.font.color.rgb = COLOR_MUTED
+        p.font.size = Pt(13)
+        p.font.color.rgb = COLOR_TEXT
 
-    c_s2_2 = add_card(s2, Inches(6.8), Inches(1.5), Inches(5.7), Inches(4.8))
-    tb_s2_2 = s2.shapes.add_textbox(Inches(7.0), Inches(1.7), Inches(5.3), Inches(4.4))
+    c_s2_2 = add_card(s2, Inches(6.8), Inches(1.5), Inches(5.7), Inches(5.2))
+    tb_s2_2 = s2.shapes.add_textbox(Inches(7.0), Inches(1.7), Inches(5.3), Inches(4.8))
     t_s2_2 = tb_s2_2.text_frame
     t_s2_2.word_wrap = True
 
     p = t_s2_2.paragraphs[0]
-    p.text = "Project Problem & Objectives"
+    p.text = "Project Objectives"
     p.font.size = Pt(20)
     p.font.bold = True
-    p.font.color.rgb = COLOR_ACCENT
+    p.font.color.rgb = COLOR_PRIMARY
 
     bullet_points_2 = [
         "Problem: Corporate salary estimation is manual, unstandardized, and black-box.",
@@ -172,8 +192,8 @@ def create_deck():
     for bp in bullet_points_2:
         p = t_s2_2.add_paragraph()
         p.text = f"• {bp}"
-        p.font.size = Pt(14)
-        p.font.color.rgb = COLOR_MUTED
+        p.font.size = Pt(13)
+        p.font.color.rgb = COLOR_TEXT
 
     # =========================================================================
     # Slide 3: Key Features & Core Modules
@@ -190,8 +210,8 @@ def create_deck():
     
     top_pos = 1.5
     for title, desc in features:
-        card = add_card(s3, Inches(0.8), Inches(top_pos), Inches(11.7), Inches(0.9))
-        tb = s3.shapes.add_textbox(Inches(1.0), Inches(top_pos + 0.1), Inches(11.3), Inches(0.7))
+        card = add_card(s3, Inches(0.8), Inches(top_pos), Inches(11.7), Inches(0.95))
+        tb = s3.shapes.add_textbox(Inches(1.0), Inches(top_pos + 0.1), Inches(11.3), Inches(0.75))
         tf = tb.text_frame
         tf.word_wrap = True
         p = tf.paragraphs[0]
@@ -199,15 +219,15 @@ def create_deck():
         r1 = p.add_run()
         r1.text = f"{title}: "
         r1.font.bold = True
-        r1.font.size = Pt(16)
-        r1.font.color.rgb = COLOR_ACCENT
+        r1.font.size = Pt(15)
+        r1.font.color.rgb = COLOR_PRIMARY
         
         r2 = p.add_run()
         r2.text = desc
-        r2.font.size = Pt(14)
+        r2.font.size = Pt(13)
         r2.font.color.rgb = COLOR_TEXT
         
-        top_pos += 1.05
+        top_pos += 1.08
 
     # =========================================================================
     # Slide 4: ML Pipeline & Preprocessing
@@ -224,20 +244,20 @@ def create_deck():
 
     left_pos = 0.8
     for stitle, sdesc in steps:
-        card = add_card(s4, Inches(left_pos), Inches(1.6), Inches(2.1), Inches(4.5))
-        tb = s4.shapes.add_textbox(Inches(left_pos + 0.1), Inches(1.8), Inches(1.9), Inches(4.1))
+        card = add_card(s4, Inches(left_pos), Inches(1.6), Inches(2.1), Inches(5.0))
+        tb = s4.shapes.add_textbox(Inches(left_pos + 0.1), Inches(1.8), Inches(1.9), Inches(4.6))
         tf = tb.text_frame
         tf.word_wrap = True
         
         p = tf.paragraphs[0]
         p.text = stitle
-        p.font.size = Pt(16)
+        p.font.size = Pt(15)
         p.font.bold = True
         p.font.color.rgb = COLOR_PRIMARY
         
         p2 = tf.add_paragraph()
         p2.text = sdesc
-        p2.font.size = Pt(13)
+        p2.font.size = Pt(12)
         p2.font.color.rgb = COLOR_MUTED
         
         left_pos += 2.4
@@ -254,11 +274,11 @@ def create_deck():
         ("10,000", "Cleaned Training Profiles")
     ]
 
-    positions = [(0.8, 1.6), (6.8, 1.6), (0.8, 4.1), (6.8, 4.1)]
+    positions = [(0.8, 1.6), (6.8, 1.6), (0.8, 4.2), (6.8, 4.2)]
     for idx, (mval, mlbl) in enumerate(metrics):
         l, t = positions[idx]
-        card = add_card(s5, Inches(l), Inches(t), Inches(5.7), Inches(2.1))
-        tb = s5.shapes.add_textbox(Inches(l + 0.2), Inches(t + 0.3), Inches(5.3), Inches(1.5))
+        card = add_card(s5, Inches(l), Inches(t), Inches(5.7), Inches(2.2))
+        tb = s5.shapes.add_textbox(Inches(l + 0.2), Inches(t + 0.3), Inches(5.3), Inches(1.6))
         tf = tb.text_frame
         
         p1 = tf.paragraphs[0]
@@ -270,7 +290,7 @@ def create_deck():
 
         p2 = tf.add_paragraph()
         p2.text = mlbl
-        p2.font.size = Pt(16)
+        p2.font.size = Pt(15)
         p2.font.color.rgb = COLOR_TEXT
         p2.alignment = PP_ALIGN.CENTER
 
@@ -280,33 +300,33 @@ def create_deck():
     s6 = add_base_slide("Live System Test Results & Output Showcase", "Slide 06/13")
 
     # Main Hero Box
-    hcard = add_card(s6, Inches(0.8), Inches(1.5), Inches(11.7), Inches(1.8), bg_color=RGBColor(30, 41, 59))
+    hcard = add_card(s6, Inches(0.8), Inches(1.5), Inches(11.7), Inches(1.8), bg_color=RGBColor(224, 242, 254))
     htb = s6.shapes.add_textbox(Inches(1.0), Inches(1.7), Inches(11.3), Inches(1.4))
     htf = htb.text_frame
     htf.word_wrap = True
 
     p = htf.paragraphs[0]
     p.text = "Candidate Annual Salary Prediction:  ₹ 13,555,746 / yr"
-    p.font.size = Pt(26)
+    p.font.size = Pt(24)
     p.font.bold = True
-    p.font.color.rgb = COLOR_ACCENT
+    p.font.color.rgb = COLOR_PRIMARY
     p.alignment = PP_ALIGN.CENTER
 
     p_sub = htf.add_paragraph()
     p_sub.text = "Monthly Take-Home: ₹ 1,129,646 / mo   |   Hourly Rate: ₹ 6,517.19 / hr   |   Earning Percentile: Top 21%"
-    p_sub.font.size = Pt(16)
+    p_sub.font.size = Pt(15)
     p_sub.font.color.rgb = COLOR_TEXT
     p_sub.alignment = PP_ALIGN.CENTER
 
     # Left Test Profile
-    c_s6_l = add_card(s6, Inches(0.8), Inches(3.6), Inches(5.6), Inches(2.8))
-    tb_s6_l = s6.shapes.add_textbox(Inches(1.0), Inches(3.8), Inches(5.2), Inches(2.4))
+    c_s6_l = add_card(s6, Inches(0.8), Inches(3.6), Inches(5.6), Inches(3.0))
+    tb_s6_l = s6.shapes.add_textbox(Inches(1.0), Inches(3.8), Inches(5.2), Inches(2.6))
     t_s6_l = tb_s6_l.text_frame
     t_s6_l.word_wrap = True
 
     p = t_s6_l.paragraphs[0]
     p.text = "Test Profile Parameters"
-    p.font.size = Pt(18)
+    p.font.size = Pt(17)
     p.font.bold = True
     p.font.color.rgb = COLOR_PRIMARY
 
@@ -324,14 +344,14 @@ def create_deck():
         p.font.color.rgb = COLOR_MUTED
 
     # Right Confidence & Driver
-    c_s6_r = add_card(s6, Inches(6.8), Inches(3.6), Inches(5.7), Inches(2.8))
-    tb_s6_r = s6.shapes.add_textbox(Inches(7.0), Inches(3.8), Inches(5.3), Inches(2.4))
+    c_s6_r = add_card(s6, Inches(6.8), Inches(3.6), Inches(5.7), Inches(3.0))
+    tb_s6_r = s6.shapes.add_textbox(Inches(7.0), Inches(3.8), Inches(5.3), Inches(2.6))
     t_s6_r = tb_s6_r.text_frame
     t_s6_r.word_wrap = True
 
     p = t_s6_r.paragraphs[0]
     p.text = "Model Confidence & Impact Drivers"
-    p.font.size = Pt(18)
+    p.font.size = Pt(17)
     p.font.bold = True
     p.font.color.rgb = COLOR_PRIMARY
 
@@ -353,8 +373,8 @@ def create_deck():
     # =========================================================================
     s7 = add_base_slide("Explainable AI & SHAP Feature Attribution", "Slide 07/13")
     
-    c7 = add_card(s7, Inches(0.8), Inches(1.5), Inches(11.7), Inches(4.8))
-    tb7 = s7.shapes.add_textbox(Inches(1.1), Inches(1.7), Inches(11.1), Inches(4.4))
+    c7 = add_card(s7, Inches(0.8), Inches(1.5), Inches(11.7), Inches(5.2))
+    tb7 = s7.shapes.add_textbox(Inches(1.1), Inches(1.7), Inches(11.1), Inches(4.8))
     tf7 = tb7.text_frame
     tf7.word_wrap = True
 
@@ -362,7 +382,7 @@ def create_deck():
     p.text = "Feature Monetary Attribution Model Formulation"
     p.font.size = Pt(20)
     p.font.bold = True
-    p.font.color.rgb = COLOR_ACCENT
+    p.font.color.rgb = COLOR_PRIMARY
 
     shap_points = [
         "Baseline Market Reference Salary: $24,000 baseline",
@@ -374,7 +394,7 @@ def create_deck():
     for sp in shap_points:
         p = tf7.add_paragraph()
         p.text = f"✦ {sp}"
-        p.font.size = Pt(15)
+        p.font.size = Pt(14)
         p.font.color.rgb = COLOR_TEXT
 
     # =========================================================================
@@ -390,39 +410,39 @@ def create_deck():
     
     top_pos = 1.6
     for title, desc in stacks:
-        card = add_card(s8, Inches(0.8), Inches(top_pos), Inches(11.7), Inches(1.4))
-        tb = s8.shapes.add_textbox(Inches(1.1), Inches(top_pos + 0.2), Inches(11.1), Inches(1.0))
+        card = add_card(s8, Inches(0.8), Inches(top_pos), Inches(11.7), Inches(1.5))
+        tb = s8.shapes.add_textbox(Inches(1.1), Inches(top_pos + 0.2), Inches(11.1), Inches(1.1))
         tf = tb.text_frame
         tf.word_wrap = True
         
         p = tf.paragraphs[0]
         p.text = title
-        p.font.size = Pt(20)
+        p.font.size = Pt(18)
         p.font.bold = True
         p.font.color.rgb = COLOR_PRIMARY
         
         p2 = tf.add_paragraph()
         p2.text = desc
-        p2.font.size = Pt(15)
+        p2.font.size = Pt(14)
         p2.font.color.rgb = COLOR_TEXT
         
-        top_pos += 1.65
+        top_pos += 1.75
 
     # =========================================================================
     # Slide 9: User Interface Design
     # =========================================================================
     s9 = add_base_slide("User Interface & Glassmorphism Design", "Slide 09/13")
 
-    c9 = add_card(s9, Inches(0.8), Inches(1.5), Inches(11.7), Inches(4.8))
-    tb9 = s9.shapes.add_textbox(Inches(1.1), Inches(1.7), Inches(11.1), Inches(4.4))
+    c9 = add_card(s9, Inches(0.8), Inches(1.5), Inches(11.7), Inches(5.2))
+    tb9 = s9.shapes.add_textbox(Inches(1.1), Inches(1.7), Inches(11.1), Inches(4.8))
     tf9 = tb9.text_frame
     tf9.word_wrap = True
 
     p = tf9.paragraphs[0]
-    p.text = "Modern Glassmorphism UI Architecture"
+    p.text = "Glassmorphism Design System"
     p.font.size = Pt(20)
     p.font.bold = True
-    p.font.color.rgb = COLOR_ACCENT
+    p.font.color.rgb = COLOR_PRIMARY
 
     ui_points = [
         "Frosted Glass Cards: Multi-layered backdrop blur (backdrop-filter: blur(16px)) with glowing glass borders.",
@@ -442,16 +462,16 @@ def create_deck():
     # =========================================================================
     s10 = add_base_slide("Batch CSV Prediction Engine", "Slide 10/13")
 
-    c10 = add_card(s10, Inches(0.8), Inches(1.5), Inches(11.7), Inches(4.8))
-    tb10 = s10.shapes.add_textbox(Inches(1.1), Inches(1.7), Inches(11.1), Inches(4.4))
+    c10 = add_card(s10, Inches(0.8), Inches(1.5), Inches(11.7), Inches(5.2))
+    tb10 = s10.shapes.add_textbox(Inches(1.1), Inches(1.7), Inches(11.1), Inches(4.8))
     tf10 = tb10.text_frame
     tf10.word_wrap = True
 
     p = tf10.paragraphs[0]
-    p.text = "Bulk Prediction & Report Export Workflow"
+    p.text = "Bulk Prediction Workflow"
     p.font.size = Pt(20)
     p.font.bold = True
-    p.font.color.rgb = COLOR_ACCENT
+    p.font.color.rgb = COLOR_PRIMARY
 
     batch_points = [
         "Client-Side Parser: Processes CSV files directly in browser without server upload latency.",
@@ -462,7 +482,7 @@ def create_deck():
     for bp in batch_points:
         p = tf10.add_paragraph()
         p.text = f"✦ {bp}"
-        p.font.size = Pt(15)
+        p.font.size = Pt(14)
         p.font.color.rgb = COLOR_TEXT
 
     # =========================================================================
@@ -470,13 +490,13 @@ def create_deck():
     # =========================================================================
     s11 = add_base_slide("Engineering Challenges & Solutions", "Slide 11/13")
 
-    c11 = add_card(s11, Inches(0.8), Inches(1.5), Inches(11.7), Inches(4.8))
-    tb11 = s11.shapes.add_textbox(Inches(1.1), Inches(1.7), Inches(11.1), Inches(4.4))
+    c11 = add_card(s11, Inches(0.8), Inches(1.5), Inches(11.7), Inches(5.2))
+    tb11 = s11.shapes.add_textbox(Inches(1.1), Inches(1.7), Inches(11.1), Inches(4.8))
     tf11 = tb11.text_frame
     tf11.word_wrap = True
 
     p = tf11.paragraphs[0]
-    p.text = "Key Problems Solved During Internship"
+    p.text = "Key Engineering Problems Solved"
     p.font.size = Pt(20)
     p.font.bold = True
     p.font.color.rgb = COLOR_PRIMARY
@@ -497,8 +517,8 @@ def create_deck():
     # =========================================================================
     s12 = add_base_slide("Key Internship Outcomes & Skills Gained", "Slide 12/13")
 
-    c12 = add_card(s12, Inches(0.8), Inches(1.5), Inches(11.7), Inches(4.8))
-    tb12 = s12.shapes.add_textbox(Inches(1.1), Inches(1.7), Inches(11.1), Inches(4.4))
+    c12 = add_card(s12, Inches(0.8), Inches(1.5), Inches(11.7), Inches(5.2))
+    tb12 = s12.shapes.add_textbox(Inches(1.1), Inches(1.7), Inches(11.1), Inches(4.8))
     tf12 = tb12.text_frame
     tf12.word_wrap = True
 
@@ -506,7 +526,7 @@ def create_deck():
     p.text = "Learnings & Technical Competencies"
     p.font.size = Pt(20)
     p.font.bold = True
-    p.font.color.rgb = COLOR_ACCENT
+    p.font.color.rgb = COLOR_PRIMARY
 
     out_points = [
         "Hands-on mastery of multi-variate Machine Learning Regression and Joblib serialization.",
@@ -517,7 +537,7 @@ def create_deck():
     for op in out_points:
         p = tf12.add_paragraph()
         p.text = f"✦ {op}"
-        p.font.size = Pt(15)
+        p.font.size = Pt(14)
         p.font.color.rgb = COLOR_TEXT
 
     # =========================================================================
@@ -535,21 +555,21 @@ def create_deck():
     p13.alignment = PP_ALIGN.CENTER
 
     p13_sub = tf13.add_paragraph()
-    p13_sub.text = "Questions, Discussion & Feedback Are Welcome"
+    p13_sub.text = "Questions & Feedback Are Welcome"
     p13_sub.font.size = Pt(20)
     p13_sub.font.color.rgb = COLOR_MUTED
     p13_sub.alignment = PP_ALIGN.CENTER
 
-    c13_1 = add_card(s13, Inches(1.5), Inches(3.6), Inches(4.8), Inches(2.4))
-    tb13_1 = s13.shapes.add_textbox(Inches(1.7), Inches(3.8), Inches(4.4), Inches(2.0))
+    c13_1 = add_card(s13, Inches(1.5), Inches(3.6), Inches(4.8), Inches(2.6))
+    tb13_1 = s13.shapes.add_textbox(Inches(1.7), Inches(3.8), Inches(4.4), Inches(2.2))
     t13_1 = tb13_1.text_frame
     t13_1.word_wrap = True
     add_kv(t13_1, "Student Name", "Sanjana Chirutha")
     add_kv(t13_1, "STU ID", "STU6817962b86d921746376235")
     add_kv(t13_1, "Internship Period", "18/06/2025 – 30/07/2025")
 
-    c13_2 = add_card(s13, Inches(7.0), Inches(3.6), Inches(4.8), Inches(2.4))
-    tb13_2 = s13.shapes.add_textbox(Inches(7.2), Inches(3.8), Inches(4.4), Inches(2.0))
+    c13_2 = add_card(s13, Inches(7.0), Inches(3.6), Inches(4.8), Inches(2.6))
+    tb13_2 = s13.shapes.add_textbox(Inches(7.2), Inches(3.8), Inches(4.4), Inches(2.2))
     t13_2 = tb13_2.text_frame
     t13_2.word_wrap = True
     add_kv(t13_2, "GitHub Repo", "github.com/Sanjana-Chirutha")
@@ -558,7 +578,7 @@ def create_deck():
 
     output_path = "Employee_Earnings_Calculator_Presentation.pptx"
     prs.save(output_path)
-    print(f"[SUCCESS] Generated PowerPoint presentation file at {output_path}")
+    print(f"[SUCCESS] Regenerated PowerPoint presentation (.pptx) matching reference certificate design!")
 
 if __name__ == "__main__":
     create_deck()
