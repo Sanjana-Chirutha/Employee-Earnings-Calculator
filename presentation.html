@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Project Presentation | Employee Earnings Calculator</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --bg-card: rgba(21, 32, 54, 0.7);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --primary: #6366f1;
+            --secondary: #10b981;
+            --accent: #ec4899;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Slide Container */
+        .presentation-stage {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            max-width: 1000px;
+            height: 600px;
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 3rem;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .slide.active { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Slide Header */
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .slide-num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            background: rgba(99, 102, 241, 0.15);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .slide-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .slide-title i { color: var(--primary); }
+
+        /* Slide Body */
+        .slide-body {
+            flex: 1;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            overflow-y: auto;
+        }
+
+        .slide-body h3 {
+            color: var(--text-main);
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .slide-body ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .slide-body li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .slide-body li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .highlight-text {
+            color: #a5b4fc;
+            font-weight: 600;
+        }
+
+        .badge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .badge-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .badge-card .val {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--secondary);
+            display: block;
+        }
+
+        .badge-card .lbl {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Slide Footer & Controls */
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-glass);
+            padding-top: 1rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid var(--border-glass);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+
+        .btn-ctrl {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-main);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-ctrl:hover {
+            background: var(--primary);
+        }
+
+        /* Title Slide Custom Styling */
+        .title-slide-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .title-slide-content h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a5b4fc, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .title-slide-content p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .title-meta {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-glass);
+            padding: 1.2rem 2rem;
+            border-radius: 16px;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-stage">
+        <!-- Slide 1 -->
+        <div class="slide active">
+            <div class="title-slide-content">
+                <span class="slide-num" style="margin-bottom: 1rem;">Online Internship Capstone Project</span>
+                <h1>Employee Earnings Calculator</h1>
+                <p>Predictive Salary Intelligence Powered by Machine Learning & Glassmorphic Analytics</p>
+                <div class="title-meta">
+                    <p><strong>Domain:</strong> Machine Learning & Web Application Development</p>
+                    <p><strong>Live Public URL:</strong> sanjana-chirutha.github.io/Employee-Earnings-Calculator</p>
+                    <p><strong>GitHub Repository:</strong> github.com/Sanjana-Chirutha/Employee-Earnings-Calculator</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-bullseye"></i> Problem Statement & Objectives</div>
+                <span class="slide-num">Slide 02 / 12</span>
+            </div>
+            <div class="slide-body">
+                <h3>The Industry Challenge</h3>
+                <ul>
+                    <li><span class="highlight-text">Opague Compensation Benchmarking</span>: Manual salary estimation processes are slow and lack attribute-level clarity.</li>
+                    <li><span class="highlight-text">Black-Box AI Models</span>: Traditional predictions fail to explain <em>why</em> a specific salary amount was generated.</li>
+                </ul>
+                <h3>Project Objectives</h3>
+                <ul>
+                    <li>Develop a multi-variate ML regression pipeline trained on professional demographic datasets.</li>
+                    <li>Achieve high predictive accuracy (<span class="highlight-text">>95% R² score</span>).</li>
+                    <li>Build an interactive, real-time Glassmorphism web dashboard with SHAP feature attribution and multi-currency conversion ($ USD, € EUR, £ GBP, ₹ INR).</li>
+                </ul>
+            </div>
+            <div class="slide-footer">
+                <span>Employee Earnings Calculator Presentation</span>
+                <span>Intership Project</span>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-star"></i> Key Features & Core Modules</div>
+                <span class="slide-num">Slide 03 / 12</span>
+            </div>
+            <div class="slide-body">
+                <ul>
+                    <li><span class="highlight-text">Interactive ML Predictor</span>: Dynamic slider and dropdown input parameters with instant prediction updates (< 15 ms latency).</li>
+                    <li><span class="highlight-text">SHAP Explainability Waterfall</span>: Visual attribution chart showing exact dollar contributions (+) or deductions (-) relative to the $24,000 baseline.</li>
+                    <li><span class="highlight-text">Career Growth Optimizer</span>: Smart recommendations engine providing actionable advice to boost earning potential.</li>
+                    <li><span class="highlight-text">Batch CSV Processing</span>: Bulk upload employee records via drag-and-drop CSV parser with downloadable results.</li>
+                    <li><span class="highlight-text">Multi-Currency Converter</span>: Live currency conversion supporting USD, EUR, GBP, and INR.</li>
+                </ul>
+            </div>
+            <div class="slide-footer">
+                <span>Employee Earnings Calculator Presentation</span>
+                <span>Intership Project</span>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-diagram-project"></i> Machine Learning Pipeline & Data</div>
+                <span class="slide-num">Slide 04 / 12</span>
+            </div>
+            <div class="slide-body">
+                <h3>End-to-End Pipeline Stages</h3>
+                <ul>
+                    <li><span class="highlight-text">Data Ingestion</span>: 10,000+ cleaned employee records based on UCI Adult Income dataset and Bureau of Labor Statistics benchmarks.</li>
+                    <li><span class="highlight-text">Categorical Encoding</span>: Applied <code style="color:#a5b4fc">LabelEncoder</code> for Education, Occupation, Work Mode, Company Size, Market Tier, and Demographic fields.</li>
+                    <li><span class="highlight-text">Numeric Normalization</span>: Scaled numerical attributes (Age, Experience, Hours/Week) using <code style="color:#a5b4fc">MinMaxScaler</code>.</li>
+                    <li><span class="highlight-text">Model Serialization</span>: Exported trained pipeline artifacts using <code style="color:#a5b4fc">Joblib</code> for instant client-side and server-side deployment.</li>
+                </ul>
+            </div>
+            <div class="slide-footer">
+                <span>Employee Earnings Calculator Presentation</span>
+                <span>Intership Project</span>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-chart-line"></i> Model Performance & Results</div>
+                <span class="slide-num">Slide 05 / 12</span>
+            </div>
+            <div class="slide-body">
+                <h3>Algorithm: Gradient Boosting / XGBoost Regressor</h3>
+                <div class="badge-grid">
+                    <div class="badge-card">
+                        <span class="val">98.00%</span>
+                        <span class="lbl">Model Accuracy (R² Score)</span>
+                    </div>
+                    <div class="badge-card">
+                        <span class="val">$3,523.39</span>
+                        <span class="lbl">Root Mean Squared Error (RMSE)</span>
+                    </div>
+                    <div class="badge-card">
+                        <span class="val">&lt; 15 ms</span>
+                        <span class="lbl">Inference Latency</span>
+                    </div>
+                    <div class="badge-card">
+                        <span class="val">10,000</span>
+                        <span class="lbl">Cleaned Training Profiles</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <span>Employee Earnings Calculator Presentation</span>
+                <span>Intership Project</span>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-lightbulb"></i> Explainable AI & SHAP Attribution</div>
+                <span class="slide-num">Slide 06 / 12</span>
+            </div>
+            <div class="slide-body">
+                <h3>Monetary Feature Contribution Breakdown</h3>
+                <ul>
+                    <li><span class="highlight-text">Baseline Market Salary</span>: Fixed reference benchmark set at <strong style="color:#10b981">$24,000</strong>.</li>
+                    <li><span class="highlight-text">Education Multiplier</span>: Bachelor's (+$14k), Master's (+$26k), Doctorate (+$40k), Professional (+$48k).</li>
+                    <li><span class="highlight-text">Occupation Level</span>: Software Eng / AI (+$22k - $25k), Management (+$28k), Finance (+$24k).</li>
+                    <li><span class="highlight-text">Experience Trajectory</span>: Logarithmic curve accounting for initial rapid learning scaling and post-15-year plateauing.</li>
+                    <li><span class="highlight-text">Regional Market Tier</span>: Tier 1 Hub (+18%), Tier 2 (+2%), Tier 3 (-12%).</li>
+                </ul>
+            </div>
+            <div class="slide-footer">
+                <span>Employee Earnings Calculator Presentation</span>
+                <span>Intership Project</span>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-code"></i> Tech Stack & Implementation</div>
+                <span class="slide-num">Slide 07 / 12</span>
+            </div>
+            <div class="slide-body">
+                <ul>
+                    <li><span class="highlight-text">Machine Learning</span>: Python 3.12, Scikit-Learn, XGBoost, Pandas, NumPy, Joblib.</li>
+                    <li><span class="highlight-text">Web Application</span>: HTML5, Custom Glassmorphic CSS3 design system, JavaScript (ES6+), Chart.js.</li>
+                    <li><span class="highlight-text">Deployment & Hosting</span>: Git, GitHub Pages, Local HTTP Server, Streamlit Cloud integration.</li>
+                </ul>
+            </div>
+            <div class="slide-footer">
+                <span>Employee Earnings Calculator Presentation</span>
+                <span>Intership Project</span>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-palette"></i> User Interface Design (Glassmorphism)</div>
+                <span class="slide-num">Slide 08 / 12</span>
+            </div>
+            <div class="slide-body">
+                <ul>
+                    <li><span class="highlight-text">Glassmorphism Aesthetic</span>: Multi-layered frosted glass panels (<code style="color:#a5b4fc">backdrop-filter: blur(16px)</code>), vibrant neon accents, subtle glass borders.</li>
+                    <li><span class="highlight-text">Micro-Interactions</span>: Animated number counting on prediction updates, smooth range slider thumbs, glowing metric badges.</li>
+                    <li><span class="highlight-text">Responsive Layout</span>: Custom CSS grid adapting seamlessly across Mobile, Tablet, and Desktop displays.</li>
+                </ul>
+            </div>
+            <div class="slide-footer">
+                <span>Employee Earnings Calculator Presentation</span>
+                <span>Intership Project</span>
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-file-csv"></i> Batch CSV Prediction Engine</div>
+                <span class="slide-num">Slide 09 / 12</span>
+            </div>
+            <div class="slide-body">
+                <ul>
+                    <li><span class="highlight-text">Client-Side Parser</span>: Processes CSV files directly in browser without server upload delays.</li>
+                    <li><span class="highlight-text">Bulk Processing</span>: Computes predictions for hundreds of employee records in < 50 ms.</li>
+                    <li><span class="highlight-text">Data Export</span>: One-click export of batch results to downloadable formatted CSV file.</li>
+                </ul>
+            </div>
+            <div class="slide-footer">
+                <span>Employee Earnings Calculator Presentation</span>
+                <span>Intership Project</span>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-wrench"></i> Engineering Challenges & Solutions</div>
+                <span class="slide-num">Slide 10 / 12</span>
+            </div>
+            <div class="slide-body">
+                <ul>
+                    <li><span class="highlight-text">Non-Linear Salary Decay Curve</span>: Applied logarithmic experience scaling function to model real-world career plateauing.</li>
+                    <li><span class="highlight-text">Asynchronous Rendering Sync</span>: Refactored JS execution order to compute predictions before chart initialization with fallback HTML numbers.</li>
+                    <li><span class="highlight-text">Cross-Platform Encoding</span>: Resolved Windows terminal UTF-8 print stream encoding issues during model serialization.</li>
+                </ul>
+            </div>
+            <div class="slide-footer">
+                <span>Employee Earnings Calculator Presentation</span>
+                <span>Intership Project</span>
+            </div>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="slide-title"><i class="fa-solid fa-graduation-cap"></i> Internship Key Outcomes</div>
+                <span class="slide-num">Slide 11 / 12</span>
+            </div>
+            <div class="slide-body">
+                <ul>
+                    <li>Practical experience in building, scaling, and serializing machine learning regression models.</li>
+                    <li>Front-end UI/UX architecture using modern CSS glassmorphism design tokens and Chart.js integration.</li>
+                    <li>Version control, GitHub workflow execution, and cloud static hosting.</li>
+                </ul>
+            </div>
+            <div class="slide-footer">
+                <span>Employee Earnings Calculator Presentation</span>
+                <span>Intership Project</span>
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide">
+            <div class="title-slide-content">
+                <span class="slide-num" style="margin-bottom: 1rem;">Conclusion & Project Links</span>
+                <h1>Thank You!</h1>
+                <p>Questions & Feedback Welcome</p>
+                <div class="title-meta">
+                    <p><strong>GitHub Repository:</strong> github.com/Sanjana-Chirutha/Employee-Earnings-Calculator</p>
+                    <p><strong>Live Web Application:</strong> sanjana-chirutha.github.io/Employee-Earnings-Calculator</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls Bar -->
+    <div class="controls">
+        <button class="btn-ctrl" id="prev-btn"><i class="fa-solid fa-chevron-left"></i> Previous</button>
+        <span id="slide-indicator" style="align-self: center; font-weight: 700; color: #a5b4fc;">Slide 1 / 12</span>
+        <button class="btn-ctrl" id="next-btn">Next <i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const slideIndicator = document.getElementById('slide-indicator');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((s, i) => s.classList.toggle('active', i === index));
+            slideIndicator.textContent = `Slide ${index + 1} / ${slides.length}`;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Space') {
+                if (currentSlide < slides.length - 1) { currentSlide++; showSlide(currentSlide); }
+            } else if (e.key === 'ArrowLeft') {
+                if (currentSlide > 0) { currentSlide--; showSlide(currentSlide); }
+            }
+        });
+    </script>
+</body>
+</html>
