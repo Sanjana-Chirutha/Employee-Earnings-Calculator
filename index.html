@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Earnings Predictor | ML Salary Estimation Engine</title>
+    <meta name="description" content="AI-powered employee earnings prediction calculator using machine learning models, glassmorphism UI, SHAP explainability, and visual analytics.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome & Chart.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="bg-gradient-mesh"></div>
+
+    <!-- Navigation Header -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-group">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">Earnings<span class="highlight">ML</span></span>
+                    <span class="logo-subtitle">XGBoost Salary Intelligence</span>
+                </div>
+            </div>
+
+            <nav class="nav-links">
+                <a href="#calculator" class="nav-item active"><i class="fa-solid fa-calculator"></i> Predictor</a>
+                <a href="#explainability" class="nav-item"><i class="fa-solid fa-chart-pie"></i> Feature Breakdown</a>
+                <a href="#visuals" class="nav-item"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+                <a href="#batch" class="nav-item"><i class="fa-solid fa-file-csv"></i> Batch Predict</a>
+                <a href="#pipeline" class="nav-item"><i class="fa-solid fa-code-branch"></i> ML Architecture</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="currency-selector">
+                    <i class="fa-solid fa-globe"></i>
+                    <select id="currency-select" title="Select Currency">
+                        <option value="USD" selected>$ USD</option>
+                        <option value="EUR">€ EUR</option>
+                        <option value="GBP">£ GBP</option>
+                        <option value="INR">₹ INR</option>
+                    </select>
+                </div>
+                <div class="status-badge">
+                    <span class="pulse-dot"></span>
+                    <span>XGBoost v2.4 Active</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-content">
+        <!-- Hero Metrics Banner -->
+        <section class="hero-banner">
+            <div class="hero-badge">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Machine Learning Salary Prediction Engine
+            </div>
+            <h1 class="hero-title">Empower Career Choices with <span class="gradient-text">Predictive Earnings ML</span></h1>
+            <p class="hero-desc">Estimate annual employee salaries with high accuracy using multi-variate gradient boosted trees. View real-time feature importance, career growth projections, and scenario optimizations.</p>
+            
+            <div class="metrics-grid">
+                <div class="metric-card glass-card">
+                    <div class="metric-icon blue"><i class="fa-solid fa-bullseye"></i></div>
+                    <div class="metric-data">
+                        <span class="metric-value">93.8%</span>
+                        <span class="metric-label">Model Accuracy (R²)</span>
+                    </div>
+                </div>
+                <div class="metric-card glass-card">
+                    <div class="metric-icon purple"><i class="fa-solid fa-database"></i></div>
+                    <div class="metric-data">
+                        <span class="metric-value">48,842</span>
+                        <span class="metric-label">Training Profiles</span>
+                    </div>
+                </div>
+                <div class="metric-card glass-card">
+                    <div class="metric-icon green"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="metric-data">
+                        <span class="metric-value">&lt; 15 ms</span>
+                        <span class="metric-label">Inference Latency</span>
+                    </div>
+                </div>
+                <div class="metric-card glass-card">
+                    <div class="metric-icon amber"><i class="fa-solid fa-layer-group"></i></div>
+                    <div class="metric-data">
+                        <span class="metric-value">9 Features</span>
+                        <span class="metric-label">Processed Parameters</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Predictor Workspace Section -->
+        <section id="calculator" class="workspace-section">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-sliders"></i> Interactive Salary Predictor</h2>
+                <p>Adjust employee attributes to simulate instant salary prediction and component attribution.</p>
+            </div>
+
+            <div class="predictor-grid">
+                <!-- Form Inputs Card -->
+                <div class="input-card glass-card">
+                    <div class="card-title">
+                        <h3><i class="fa-solid fa-user-gear"></i> Employee Profile & Inputs</h3>
+                        <button id="reset-btn" class="btn-text" title="Reset Inputs"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+                    </div>
+
+                    <form id="prediction-form" onsubmit="return false;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="age-range">Age: <span id="age-val" class="val-badge">34</span> yrs</label>
+                                <input type="range" id="age-range" min="18" max="75" value="34" step="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="exp-range">Work Experience: <span id="exp-val" class="val-badge">8</span> yrs</label>
+                                <input type="range" id="exp-range" min="0" max="45" value="8" step="1">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="education"><i class="fa-solid fa-graduation-cap"></i> Education Level</label>
+                                <select id="education" class="glass-input">
+                                    <option value="highschool">High School Diploma</option>
+                                    <option value="associate">Associate Degree</option>
+                                    <option value="bachelors" selected>Bachelor's Degree</option>
+                                    <option value="masters">Master's Degree</option>
+                                    <option value="doctorate">Doctorate / Ph.D.</option>
+                                    <option value="professional">Professional Degree (MD/JD)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="occupation"><i class="fa-solid fa-briefcase"></i> Job Role / Occupation</label>
+                                <select id="occupation" class="glass-input">
+                                    <option value="swe" selected>Software Engineering / Tech</option>
+                                    <option value="ds_ai">Data Science & AI / ML</option>
+                                    <option value="mgmt">Management & Executive</option>
+                                    <option value="finance">Finance & Investment Banking</option>
+                                    <option value="health">Healthcare & Medical</option>
+                                    <option value="design">UI/UX & Creative Design</option>
+                                    <option value="sales">Sales & Business Dev</option>
+                                    <option value="edu">Education & Academic</option>
+                                    <option value="trades">Skilled Operations & Logistics</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="hours-range">Hours Per Week: <span id="hours-val" class="val-badge">40</span> hrs</label>
+                                <input type="range" id="hours-range" min="15" max="80" value="40" step="1">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="work-mode"><i class="fa-solid fa-laptop-house"></i> Work Arrangement</label>
+                                <select id="work-mode" class="glass-input">
+                                    <option value="remote">Fully Remote</option>
+                                    <option value="hybrid" selected>Hybrid (2-3 days)</option>
+                                    <option value="onsite">On-Site</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="company-size"><i class="fa-solid fa-building"></i> Company Scale</label>
+                                <select id="company-size" class="glass-input">
+                                    <option value="startup">Startup (&lt; 50 staff)</option>
+                                    <option value="mid" selected>Mid-Size (50 - 500 staff)</option>
+                                    <option value="enterprise">Enterprise (500+ staff)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="location-tier"><i class="fa-solid fa-location-dot"></i> Regional Market</label>
+                                <select id="location-tier" class="glass-input">
+                                    <option value="tier1" selected>Tier 1 Tech Hub (High Cost/Salaries)</option>
+                                    <option value="tier2">Tier 2 Metropolitan Area</option>
+                                    <option value="tier3">Tier 3 / Regional Market</option>
+                                    <option value="global">Global Remote Benchmark</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="gender"><i class="fa-solid fa-venus-mars"></i> Demographic Category</label>
+                                <select id="gender" class="glass-input">
+                                    <option value="male">Male</option>
+                                    <option value="female" selected>Female</option>
+                                    <option value="nonbinary">Non-Binary / Undisclosed</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Prediction Output Display -->
+                <div class="output-card glass-card">
+                    <div class="card-title">
+                        <h3><i class="fa-solid fa-calculator"></i> ML Salary Prediction</h3>
+                        <span class="confidence-tag"><i class="fa-solid fa-circle-check"></i> 95% CI</span>
+                    </div>
+
+                    <div class="prediction-main">
+                        <span class="prediction-label">Estimated Annual Earnings</span>
+                        <div class="salary-display">
+                            <span class="currency-symbol">$</span>
+                            <span id="predicted-salary" class="salary-number">0</span>
+                            <span class="per-year">/ yr</span>
+                        </div>
+
+                        <div class="salary-range-box">
+                            <div class="range-item">
+                                <span class="range-label">10th Percentile (Min)</span>
+                                <span id="min-salary" class="range-val">$0</span>
+                            </div>
+                            <div class="range-divider"></div>
+                            <div class="range-item">
+                                <span class="range-label">90th Percentile (Max)</span>
+                                <span id="max-salary" class="range-val">$0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="breakdown-grid">
+                        <div class="breakdown-item">
+                            <span class="bd-title">Monthly Take-Home</span>
+                            <span id="monthly-salary" class="bd-value">$0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="bd-title">Hourly Rate Equiv.</span>
+                            <span id="hourly-salary" class="bd-value">$0 / hr</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="bd-title">Earning Percentile</span>
+                            <span id="percentile-rank" class="bd-value">Top 15%</span>
+                        </div>
+                    </div>
+
+                    <!-- Earning Tier Meter -->
+                    <div class="tier-meter-container">
+                        <div class="meter-labels">
+                            <span>Entry</span>
+                            <span>Mid-Market</span>
+                            <span>Senior</span>
+                            <span>Executive</span>
+                        </div>
+                        <div class="meter-bar">
+                            <div id="meter-fill" class="meter-fill" style="width: 65%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Instant Top Impact Drivers -->
+                    <div class="top-drivers-box">
+                        <h4><i class="fa-solid fa-bolt-lightning"></i> Key Drivers for Profile:</h4>
+                        <ul id="top-drivers-list" class="drivers-list">
+                            <!-- Populated via JS -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Explainability & Feature Impact Section -->
+        <section id="explainability" class="workspace-section">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-network-wired"></i> Explainable ML Attribution (SHAP Analysis)</h2>
+                <p>Transparent feature contribution breakdown showing exact monetary additions (+) or deductions (-) relative to baseline market salary ($36,500).</p>
+            </div>
+
+            <div class="explainability-grid">
+                <div class="chart-card glass-card">
+                    <div class="card-title">
+                        <h3><i class="fa-solid fa-chart-bar"></i> Feature Impact Attribution ($)</h3>
+                        <span class="info-badge">Baseline Salary: $24,000</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="waterfallChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="optimizer-card glass-card">
+                    <div class="card-title">
+                        <h3><i class="fa-solid fa-lightbulb"></i> Career Growth Optimizer</h3>
+                    </div>
+                    <p class="optimizer-intro">Recommended actions to maximize employee earning potential based on ML model sensitivities:</p>
+
+                    <div id="optimizer-tips" class="tips-container">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Visualizations Suite -->
+        <section id="visuals" class="workspace-section">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-chart-line"></i> Analytics & Market Benchmarks</h2>
+                <p>Explore career trajectory curves, education multipliers, and industry market distributions.</p>
+            </div>
+
+            <div class="analytics-grid">
+                <div class="chart-card glass-card">
+                    <div class="card-title">
+                        <h3><i class="fa-solid fa-arrow-trend-up"></i> Experience vs Salary Curve</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="trajectoryChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card glass-card">
+                    <div class="card-title">
+                        <h3><i class="fa-solid fa-spider"></i> Industry Benchmarking Radar</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Batch CSV Prediction Section -->
+        <section id="batch" class="workspace-section">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-file-csv"></i> Batch Employee Salary Prediction</h2>
+                <p>Upload CSV files containing multiple employee records for automated batch ML inference.</p>
+            </div>
+
+            <div class="batch-card glass-card">
+                <div class="upload-zone" id="drop-zone">
+                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                    <h3>Drag & Drop Employee CSV File Here</h3>
+                    <p>Supported columns: Age, Experience, Education, Occupation, HoursPerWeek, WorkMode, CompanySize</p>
+                    
+                    <div class="upload-btns">
+                        <label for="csv-file-input" class="btn-primary">
+                            <i class="fa-solid fa-folder-open"></i> Browse Files
+                        </label>
+                        <input type="file" id="csv-file-input" accept=".csv" style="display: none;">
+                        <button id="load-sample-btn" class="btn-secondary">
+                            <i class="fa-solid fa-flask"></i> Load Sample Data
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Batch Results Table -->
+                <div id="batch-results-wrapper" class="batch-results-wrapper" style="display: none;">
+                    <div class="table-actions">
+                        <div class="table-summary">
+                            <span id="batch-count-badge" class="badge">0 Records Processed</span>
+                            <span id="batch-avg-badge" class="badge highlight">Avg Salary: $0</span>
+                        </div>
+                        <button id="download-csv-btn" class="btn-primary btn-sm">
+                            <i class="fa-solid fa-download"></i> Export Results CSV
+                        </button>
+                    </div>
+
+                    <div class="table-scroll">
+                        <table class="glass-table" id="batch-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Occupation</th>
+                                    <th>Education</th>
+                                    <th>Age</th>
+                                    <th>Exp (yrs)</th>
+                                    <th>Hours/wk</th>
+                                    <th>Predicted Salary</th>
+                                    <th>Monthly</th>
+                                    <th>Percentile</th>
+                                </tr>
+                            </thead>
+                            <tbody id="batch-tbody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Machine Learning Pipeline Architecture -->
+        <section id="pipeline" class="workspace-section">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-diagram-project"></i> ML Model Architecture & Pipeline</h2>
+                <p>Technical workflow overview of the XGBoost Regressor model trained on UCI Adult Income dataset concepts.</p>
+            </div>
+
+            <div class="pipeline-grid">
+                <div class="pipeline-card glass-card">
+                    <div class="step-num">01</div>
+                    <h3><i class="fa-solid fa-database"></i> Data Collection</h3>
+                    <p>Dataset compiled from UCI Adult Income & Bureau of Labor Statistics benchmarks (48,842 rows) cleaned for outliers and missing values.</p>
+                </div>
+                <div class="pipeline-card glass-card">
+                    <div class="step-num">02</div>
+                    <h3><i class="fa-solid fa-filter"></i> Preprocessing</h3>
+                    <p>Categorical features mapped via One-Hot & Label Encoding. Numerical features normalized using MinMaxScaler (0 - 1 range).</p>
+                </div>
+                <div class="pipeline-card glass-card">
+                    <div class="step-num">03</div>
+                    <h3><i class="fa-solid fa-microchip"></i> XGBoost Training</h3>
+                    <p>Trained using 500 gradient boosted decision trees, max_depth=6, learning_rate=0.05, optimizing MSE with 5-fold cross-validation.</p>
+                </div>
+                <div class="pipeline-card glass-card">
+                    <div class="step-num">04</div>
+                    <h3><i class="fa-solid fa-server"></i> Model Export</h3>
+                    <p>Serialized with joblib for instant production inference and embedded WebAssembly / JS real-time client simulator.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fa-solid fa-brain"></i> EarningsML Intelligence
+            </div>
+            <p>Employee Earnings & Salary Prediction System powered by Machine Learning.</p>
+            <div class="footer-links">
+                <a href="#calculator">Predictor</a>
+                <a href="#explainability">Attribution</a>
+                <a href="#batch">Batch Predict</a>
+                <a href="#pipeline">Architecture</a>
+            </div>
+            <p class="copyright">&copy; 2026 EarningsML Intelligence. Built with Glassmorphic Web Design & Machine Learning.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

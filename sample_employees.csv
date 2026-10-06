@@ -1,0 +1,11 @@
+Age,Experience,Education,Occupation,HoursPerWeek,WorkMode,CompanySize
+32,6,bachelors,swe,40,hybrid,mid
+45,18,masters,mgmt,50,onsite,enterprise
+28,4,bachelors,ds_ai,45,remote,startup
+52,24,doctorate,edu,35,hybrid,mid
+38,12,associate,finance,42,onsite,enterprise
+26,2,highschool,trades,40,onsite,mid
+41,15,masters,health,48,onsite,enterprise
+30,7,bachelors,design,40,remote,startup
+35,9,professional,health,55,onsite,enterprise
+29,5,bachelors,sales,50,hybrid,startup
