@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internship Project Presentation | Employee Earnings Calculator</title>
+    <title>Internship Presentation | Sanjana Chirutha | Edunet Foundation & AICTE</title>
     <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-dark: #090d16;
-            --bg-card: rgba(21, 32, 54, 0.7);
+            --bg-card: rgba(21, 32, 54, 0.75);
             --border-glass: rgba(255, 255, 255, 0.1);
             --primary: #6366f1;
             --secondary: #10b981;
@@ -42,13 +42,13 @@
 
         .slide {
             width: 100%;
-            max-width: 1000px;
-            height: 600px;
+            max-width: 1050px;
+            height: 620px;
             background: var(--bg-card);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border-glass);
             border-radius: 20px;
-            padding: 3rem;
+            padding: 2.5rem 3rem;
             display: none;
             flex-direction: column;
             justify-content: space-between;
@@ -63,29 +63,61 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Header Badges */
+        .org-header-badges {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .org-badge {
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #a5b4fc;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 0.3rem 0.9rem;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .org-badge.aicte {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.3);
+            color: #34d399;
+        }
+
+        .org-badge.ibm {
+            background: rgba(236, 72, 153, 0.15);
+            border-color: rgba(236, 72, 153, 0.3);
+            color: #f472b6;
+        }
+
         /* Slide Header */
         .slide-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--border-glass);
-            padding-bottom: 1rem;
-            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.25rem;
         }
 
         .slide-num {
             font-family: 'Outfit', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 700;
             color: var(--primary);
             background: rgba(99, 102, 241, 0.15);
-            padding: 0.3rem 0.8rem;
+            padding: 0.25rem 0.75rem;
             border-radius: 20px;
         }
 
         .slide-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             font-weight: 700;
             color: var(--text-main);
             display: flex;
@@ -98,16 +130,16 @@
         /* Slide Body */
         .slide-body {
             flex: 1;
-            font-size: 1.05rem;
-            line-height: 1.7;
+            font-size: 1rem;
+            line-height: 1.65;
             color: var(--text-muted);
             overflow-y: auto;
         }
 
         .slide-body h3 {
             color: var(--text-main);
-            font-size: 1.2rem;
-            margin: 1rem 0 0.5rem;
+            font-size: 1.15rem;
+            margin: 0.8rem 0 0.4rem;
         }
 
         .slide-body ul {
@@ -117,8 +149,8 @@
 
         .slide-body li {
             position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.75rem;
+            padding-left: 1.4rem;
+            margin-bottom: 0.65rem;
         }
 
         .slide-body li::before {
@@ -137,27 +169,27 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
-            margin-top: 1.5rem;
+            margin-top: 1.25rem;
         }
 
         .badge-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-glass);
             border-radius: 12px;
-            padding: 1.25rem;
+            padding: 1rem;
             text-align: center;
         }
 
         .badge-card .val {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             font-weight: 800;
             color: var(--secondary);
             display: block;
         }
 
         .badge-card .lbl {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: var(--text-muted);
         }
 
@@ -167,22 +199,22 @@
             justify-content: space-between;
             align-items: center;
             border-top: 1px solid var(--border-glass);
-            padding-top: 1rem;
-            margin-top: 1.5rem;
-            font-size: 0.85rem;
+            padding-top: 0.8rem;
+            margin-top: 1.25rem;
+            font-size: 0.82rem;
             color: var(--text-muted);
         }
 
         .controls {
             position: fixed;
-            bottom: 2rem;
+            bottom: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 1rem;
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.95);
             border: 1px solid var(--border-glass);
-            padding: 0.6rem 1.2rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 50px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             z-index: 100;
@@ -192,7 +224,7 @@
             background: rgba(255, 255, 255, 0.1);
             border: none;
             color: var(--text-main);
-            padding: 0.5rem 1rem;
+            padding: 0.45rem 1rem;
             border-radius: 20px;
             cursor: pointer;
             font-weight: 600;
@@ -200,6 +232,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-size: 0.85rem;
         }
 
         .btn-ctrl:hover {
@@ -218,42 +251,66 @@
 
         .title-slide-content h1 {
             font-family: 'Outfit', sans-serif;
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             font-weight: 800;
             background: linear-gradient(135deg, #a5b4fc, #6366f1, #ec4899);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
-        .title-slide-content p {
-            font-size: 1.2rem;
+        .title-slide-content p.subtitle {
+            font-size: 1.1rem;
             color: var(--text-muted);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
-        .title-meta {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-glass);
-            padding: 1.2rem 2rem;
-            border-radius: 16px;
-            font-size: 0.95rem;
+        .title-meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            width: 100%;
+            max-width: 800px;
+            text-align: left;
         }
+
+        .meta-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            font-size: 0.88rem;
+        }
+
+        .meta-card strong { color: var(--text-main); }
+        .meta-card .val { color: #a5b4fc; font-weight: 600; }
     </style>
 </head>
 <body>
 
     <div class="presentation-stage">
-        <!-- Slide 1 -->
+        <!-- Slide 1: Title Slide -->
         <div class="slide active">
             <div class="title-slide-content">
-                <span class="slide-num" style="margin-bottom: 1rem;">Online Internship Capstone Project</span>
+                <div class="org-header-badges">
+                    <span class="org-badge">EDUNET FOUNDATION</span>
+                    <span class="org-badge aicte">AICTE INTERNSHIP</span>
+                    <span class="org-badge ibm">IBM SKILLSBUILD</span>
+                </div>
                 <h1>Employee Earnings Calculator</h1>
-                <p>Predictive Salary Intelligence Powered by Machine Learning & Glassmorphic Analytics</p>
-                <div class="title-meta">
-                    <p><strong>Domain:</strong> Machine Learning & Web Application Development</p>
-                    <p><strong>Live Public URL:</strong> sanjana-chirutha.github.io/Employee-Earnings-Calculator</p>
-                    <p><strong>GitHub Repository:</strong> github.com/Sanjana-Chirutha/Employee-Earnings-Calculator</p>
+                <p class="subtitle">Predictive Salary Intelligence System Powered by Machine Learning</p>
+                
+                <div class="title-meta-grid">
+                    <div class="meta-card">
+                        <p><strong>Student Name:</strong> <span class="val">Sanjana Chirutha</span></p>
+                        <p><strong>Student STU ID:</strong> <span class="val">STU6817962b86d921746376235</span></p>
+                        <p><strong>Domain:</strong> <span class="val">AI & Machine Learning (6 Weeks)</span></p>
+                    </div>
+                    <div class="meta-card">
+                        <p><strong>Implemented By:</strong> <span class="val">Edunet Foundation</span></p>
+                        <p><strong>Collaborators:</strong> <span class="val">AICTE & IBM SkillsBuild</span></p>
+                        <p><strong>Duration:</strong> <span class="val">18/06/2025 – 30/07/2025</span></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -261,25 +318,25 @@
         <!-- Slide 2 -->
         <div class="slide">
             <div class="slide-header">
-                <div class="slide-title"><i class="fa-solid fa-bullseye"></i> Problem Statement & Objectives</div>
+                <div class="slide-title"><i class="fa-solid fa-building-columns"></i> Organization & Program Background</div>
                 <span class="slide-num">Slide 02 / 12</span>
             </div>
             <div class="slide-body">
-                <h3>The Industry Challenge</h3>
+                <h3>Collaborating Bodies</h3>
                 <ul>
-                    <li><span class="highlight-text">Opague Compensation Benchmarking</span>: Manual salary estimation processes are slow and lack attribute-level clarity.</li>
-                    <li><span class="highlight-text">Black-Box AI Models</span>: Traditional predictions fail to explain <em>why</em> a specific salary amount was generated.</li>
+                    <li><span class="highlight-text">Edunet Foundation</span>: Primary implementing organization leading youth digital skill development.</li>
+                    <li><span class="highlight-text">AICTE</span>: All India Council for Technical Education enabling statutory national technical education quality.</li>
+                    <li><span class="highlight-text">IBM SkillsBuild</span>: Industry technology partner providing practical AI & ML learning workflows.</li>
                 </ul>
-                <h3>Project Objectives</h3>
+                <h3>Project Problem & Goals</h3>
                 <ul>
-                    <li>Develop a multi-variate ML regression pipeline trained on professional demographic datasets.</li>
-                    <li>Achieve high predictive accuracy (<span class="highlight-text">>95% R² score</span>).</li>
-                    <li>Build an interactive, real-time Glassmorphism web dashboard with SHAP feature attribution and multi-currency conversion ($ USD, € EUR, £ GBP, ₹ INR).</li>
+                    <li><span class="highlight-text">Problem</span>: Corporate salary estimation is manual, unstandardized, and black-box.</li>
+                    <li><span class="highlight-text">Goal</span>: Build an end-to-end multi-variate ML regression pipeline predicting annual employee salaries with high accuracy (**98.0% R² Score**) and SHAP explainability.</li>
                 </ul>
             </div>
             <div class="slide-footer">
-                <span>Employee Earnings Calculator Presentation</span>
-                <span>Intership Project</span>
+                <span>Student: Sanjana Chirutha (STU: STU6817962b86d921746376235)</span>
+                <span>Edunet Foundation | AICTE | IBM SkillsBuild</span>
             </div>
         </div>
 
@@ -291,16 +348,16 @@
             </div>
             <div class="slide-body">
                 <ul>
-                    <li><span class="highlight-text">Interactive ML Predictor</span>: Dynamic slider and dropdown input parameters with instant prediction updates (< 15 ms latency).</li>
-                    <li><span class="highlight-text">SHAP Explainability Waterfall</span>: Visual attribution chart showing exact dollar contributions (+) or deductions (-) relative to the $24,000 baseline.</li>
+                    <li><span class="highlight-text">Interactive ML Predictor</span>: Dynamic slider and dropdown controls with instant prediction updates (< 15 ms latency).</li>
+                    <li><span class="highlight-text">SHAP Feature Attribution</span>: Visual breakdown showing dollar contributions (+) or deductions (-) relative to the $24,000 baseline.</li>
                     <li><span class="highlight-text">Career Growth Optimizer</span>: Smart recommendations engine providing actionable advice to boost earning potential.</li>
                     <li><span class="highlight-text">Batch CSV Processing</span>: Bulk upload employee records via drag-and-drop CSV parser with downloadable results.</li>
-                    <li><span class="highlight-text">Multi-Currency Converter</span>: Live currency conversion supporting USD, EUR, GBP, and INR.</li>
+                    <li><span class="highlight-text">Multi-Currency Converter</span>: Live currency conversion supporting USD ($), EUR (€), GBP (£), and INR (₹).</li>
                 </ul>
             </div>
             <div class="slide-footer">
-                <span>Employee Earnings Calculator Presentation</span>
-                <span>Intership Project</span>
+                <span>Student: Sanjana Chirutha (STU: STU6817962b86d921746376235)</span>
+                <span>Edunet Foundation | AICTE | IBM SkillsBuild</span>
             </div>
         </div>
 
@@ -311,17 +368,17 @@
                 <span class="slide-num">Slide 04 / 12</span>
             </div>
             <div class="slide-body">
-                <h3>End-to-End Pipeline Stages</h3>
+                <h3>Pipeline Stages</h3>
                 <ul>
                     <li><span class="highlight-text">Data Ingestion</span>: 10,000+ cleaned employee records based on UCI Adult Income dataset and Bureau of Labor Statistics benchmarks.</li>
                     <li><span class="highlight-text">Categorical Encoding</span>: Applied <code style="color:#a5b4fc">LabelEncoder</code> for Education, Occupation, Work Mode, Company Size, Market Tier, and Demographic fields.</li>
                     <li><span class="highlight-text">Numeric Normalization</span>: Scaled numerical attributes (Age, Experience, Hours/Week) using <code style="color:#a5b4fc">MinMaxScaler</code>.</li>
-                    <li><span class="highlight-text">Model Serialization</span>: Exported trained pipeline artifacts using <code style="color:#a5b4fc">Joblib</code> for instant client-side and server-side deployment.</li>
+                    <li><span class="highlight-text">Model Serialization</span>: Exported trained pipeline artifacts using <code style="color:#a5b4fc">Joblib</code> for instant deployment.</li>
                 </ul>
             </div>
             <div class="slide-footer">
-                <span>Employee Earnings Calculator Presentation</span>
-                <span>Intership Project</span>
+                <span>Student: Sanjana Chirutha (STU: STU6817962b86d921746376235)</span>
+                <span>Edunet Foundation | AICTE | IBM SkillsBuild</span>
             </div>
         </div>
 
@@ -353,8 +410,8 @@
                 </div>
             </div>
             <div class="slide-footer">
-                <span>Employee Earnings Calculator Presentation</span>
-                <span>Intership Project</span>
+                <span>Student: Sanjana Chirutha (STU: STU6817962b86d921746376235)</span>
+                <span>Edunet Foundation | AICTE | IBM SkillsBuild</span>
             </div>
         </div>
 
@@ -375,8 +432,8 @@
                 </ul>
             </div>
             <div class="slide-footer">
-                <span>Employee Earnings Calculator Presentation</span>
-                <span>Intership Project</span>
+                <span>Student: Sanjana Chirutha (STU: STU6817962b86d921746376235)</span>
+                <span>Edunet Foundation | AICTE | IBM SkillsBuild</span>
             </div>
         </div>
 
@@ -394,8 +451,8 @@
                 </ul>
             </div>
             <div class="slide-footer">
-                <span>Employee Earnings Calculator Presentation</span>
-                <span>Intership Project</span>
+                <span>Student: Sanjana Chirutha (STU: STU6817962b86d921746376235)</span>
+                <span>Edunet Foundation | AICTE | IBM SkillsBuild</span>
             </div>
         </div>
 
@@ -413,8 +470,8 @@
                 </ul>
             </div>
             <div class="slide-footer">
-                <span>Employee Earnings Calculator Presentation</span>
-                <span>Intership Project</span>
+                <span>Student: Sanjana Chirutha (STU: STU6817962b86d921746376235)</span>
+                <span>Edunet Foundation | AICTE | IBM SkillsBuild</span>
             </div>
         </div>
 
@@ -432,8 +489,8 @@
                 </ul>
             </div>
             <div class="slide-footer">
-                <span>Employee Earnings Calculator Presentation</span>
-                <span>Intership Project</span>
+                <span>Student: Sanjana Chirutha (STU: STU6817962b86d921746376235)</span>
+                <span>Edunet Foundation | AICTE | IBM SkillsBuild</span>
             </div>
         </div>
 
@@ -451,8 +508,8 @@
                 </ul>
             </div>
             <div class="slide-footer">
-                <span>Employee Earnings Calculator Presentation</span>
-                <span>Intership Project</span>
+                <span>Student: Sanjana Chirutha (STU: STU6817962b86d921746376235)</span>
+                <span>Edunet Foundation | AICTE | IBM SkillsBuild</span>
             </div>
         </div>
 
@@ -470,20 +527,31 @@
                 </ul>
             </div>
             <div class="slide-footer">
-                <span>Employee Earnings Calculator Presentation</span>
-                <span>Intership Project</span>
+                <span>Student: Sanjana Chirutha (STU: STU6817962b86d921746376235)</span>
+                <span>Edunet Foundation | AICTE | IBM SkillsBuild</span>
             </div>
         </div>
 
         <!-- Slide 12 -->
         <div class="slide">
             <div class="title-slide-content">
-                <span class="slide-num" style="margin-bottom: 1rem;">Conclusion & Project Links</span>
+                <div class="org-header-badges" style="margin-bottom: 0.5rem;">
+                    <span class="org-badge">EDUNET FOUNDATION</span>
+                    <span class="org-badge aicte">AICTE</span>
+                    <span class="org-badge ibm">IBM SKILLSBUILD</span>
+                </div>
                 <h1>Thank You!</h1>
-                <p>Questions & Feedback Welcome</p>
-                <div class="title-meta">
-                    <p><strong>GitHub Repository:</strong> github.com/Sanjana-Chirutha/Employee-Earnings-Calculator</p>
-                    <p><strong>Live Web Application:</strong> sanjana-chirutha.github.io/Employee-Earnings-Calculator</p>
+                <p class="subtitle">Questions, Discussion & Feedback Are Welcome</p>
+                <div class="title-meta-grid">
+                    <div class="meta-card">
+                        <p><strong>Student Name:</strong> <span class="val">Sanjana Chirutha</span></p>
+                        <p><strong>STU ID:</strong> <span class="val">STU6817962b86d921746376235</span></p>
+                        <p><strong>Duration:</strong> <span class="val">18/06/2025 – 30/07/2025</span></p>
+                    </div>
+                    <div class="meta-card">
+                        <p><strong>GitHub Repo:</strong> <span class="val">github.com/Sanjana-Chirutha/Employee-Earnings-Calculator</span></p>
+                        <p><strong>Live Web App:</strong> <span class="val">sanjana-chirutha.github.io/Employee-Earnings-Calculator</span></p>
+                    </div>
                 </div>
             </div>
         </div>
