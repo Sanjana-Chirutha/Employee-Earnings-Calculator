@@ -1,0 +1,125 @@
+﻿
+=== Slide 1 ===
+  [TextBox 3]: INTERNSHIP EVALUATION
+  [TextBox 5]: Presented by
+  [TextBox 6]: Name:
+  [TextBox 7]: Sanjana Chirutha
+  [TextBox 8]: Roll No:
+  [TextBox 9]: STU6817962b86d921746376235
+  [TextBox 10]: Branch:
+  [TextBox 11]: AI & Machine Learning
+  [TextBox 13]: 1 / 12
+
+=== Slide 2 ===
+  [TextBox 2]: Organization Profile
+  [TextBox 4]: 2 / 12
+  [TextBox 6]: Detail
+  [TextBox 7]: Information
+  [TextBox 9]: Organization
+  [TextBox 10]: Edunet Foundation (AICTE | IBM SkillsBuild)
+  [TextBox 12]: Mode
+  [TextBox 13]: Virtual / Online Internship
+  [TextBox 15]: Duration
+  [TextBox 16]: 6 Weeks  (18 June 2025 - 30 July 2025)
+  [TextBox 18]: Role Assigned
+  [TextBox 19]: AI & ML Engineer (Project Intern)
+  [TextBox 21]: Project Delivered
+  [TextBox 22]: Employee Earnings Calculator (ML Salary Intelligence)
+  [TextBox 24]: Trusted By
+  [TextBox 25]: AICTE - All India Council for Technical Education
+  [TextBox 27]: Certificate ID
+  [TextBox 28]: STU6817962b86d921746376235
+
+=== Slide 3 ===
+  [TextBox 2]: Problem Statement
+  [TextBox 4]: 3 / 12
+  [TextBox 5]: PROJECT TITLE: Employee Earnings Calculator (ML-Powered Salary Intelligence)
+  [TextBox 6]: Salary estimation in corporate environments is largely manual, subjective, and inconsistent. HR team
+  [TextBox 8]: o  No Data-Driven Benchmark: Companies lack objective salary benchmarks calibrated to industry, role
+  [TextBox 8]: o  Black-Box Decisions: Compensation decisions are non-transparent, causing employee dissatisfaction
+  [TextBox 8]: o  Manual & Error-Prone: Spreadsheet-based estimation is slow, inconsistent across departments, and 
+  [TextBox 8]: o  Lack of Explainability: Even when ML models exist, organizations cannot explain why a particular 
+  [TextBox 8]: o  No Scenario Analysis: HR cannot simulate 'what-if' scenarios to understand how education or reloc
+  [TextBox 8]: o  Scalability: Manual estimation fails at scale — evaluating hundreds of candidates simultaneously 
+
+=== Slide 4 ===
+  [TextBox 2]: Objectives
+  [TextBox 4]: 4 / 12
+  [TextBox 5]: o  Accurate Prediction: Build an XGBoost / Gradient Boosting ML regression pipeline predicting annua
+  [TextBox 5]: o  Explainability (XAI): Implement SHAP-style feature attribution showing each factor's monetary con
+  [TextBox 5]: o  Interactive UI: Design a real-time web predictor with sliders and dropdowns with instant updates 
+  [TextBox 5]: o  Batch Processing: Enable bulk CSV upload to predict salaries for hundreds of employees simultaneo
+  [TextBox 5]: o  Career Optimizer: Provide AI-generated sensitivity recommendations helping employees understand h
+  [TextBox 5]: o  Multi-Currency Support: Display predicted salaries in USD ($), EUR (E), GBP (P), and INR (Rs) wit
+
+=== Slide 5 ===
+  [TextBox 2]: Technologies Used
+  [TextBox 4]: 5 / 12
+  [TextBox 5]: o  Machine Learning - Python 3.12, XGBoost, Scikit-Learn, Pandas, NumPy, Joblib for model training, 
+  [TextBox 5]: o  Frontend - HTML5, Custom Glassmorphism CSS3 (backdrop-filter, neon glows), JavaScript ES6+ for al
+  [TextBox 5]: o  Visualization - Chart.js for experience growth trajectory, industry benchmark radar, and feature 
+  [TextBox 5]: o  Data Pipeline - MinMaxScaler (numerical features), LabelEncoder (categorical: education, occupati
+  [TextBox 5]: o  Deployment - GitHub Pages (static hosting), Git for version control, Python HTTP Server for local
+
+=== Slide 6 ===
+  [TextBox 2]: Methodology
+  [TextBox 4]: 6 / 12
+  [TextBox 5]: o  Data Ingestion & Cleaning: 10,000+ synthetic employee profiles generated from UCI Adult Income be
+  [TextBox 5]: o  Feature Engineering: 9 input features - Age, Experience, Education, Occupation, Hours/Week, Work 
+  [TextBox 5]: o  Preprocessing Pipeline: LabelEncoder for categoricals; MinMaxScaler for numericals; stratified 80
+  [TextBox 5]: o  Model Training: XGBoost Regressor (300 estimators, depth 6, lr=0.05); evaluated via R2 Score and 
+  [TextBox 5]: o  Salary Inference: Client-side JavaScript mirror of the trained model enabling real-time predictio
+  [TextBox 5]: o  SHAP Attribution: Waterfall chart breaking down each feature's monetary contribution (positive/ne
+  [TextBox 5]: o  Model Serialization: Trained model, scaler, and encoders exported as .joblib artifacts for reprod
+
+=== Slide 7 ===
+  [TextBox 2]: Results
+  [TextBox 4]: 7 / 12
+  [TextBox 5]: Salary Predictor - Interactive Dashboard
+  [TextBox 7]: Feature Attribution - SHAP Waterfall Chart
+  [TextBox 9]: Analytics - Experience Growth & Radar Chart
+
+=== Slide 8 ===
+  [TextBox 2]: Results (contd.)
+  [TextBox 4]: 8 / 12
+  [TextBox 5]: Batch Predict - Bulk CSV Upload & Export
+  [TextBox 7]: ML Architecture - XGBoost Pipeline View
+  [TextBox 9]: Career Optimizer - What-If Scenario Engine
+
+=== Slide 9 ===
+  [TextBox 2]: Certificate
+  [TextBox 4]: 9 / 12
+
+=== Slide 10 ===
+  [TextBox 2]: Challenges & Learning Outcomes
+  [TextBox 4]: 10 / 12
+  [TextBox 5]: Challenges Faced
+  [TextBox 6]: o  Non-Linear Salary Decay: Real-world experience gains plateau after ~15 years - modelled using log
+  [TextBox 6]: o  Async Rendering Sync: JavaScript chart initialization ran before ML prediction completed; refacto
+  [TextBox 6]: o  Windows Encoding: Python's cp1252 terminal encoding caused UnicodeEncodeError for emoji print sta
+  [TextBox 6]: o  Client-Side ML Mirror: Replicating the trained XGBoost logic in pure JavaScript required careful 
+  [TextBox 6]: o  CSV Batch Performance: Parsing large CSV files in-browser caused UI freezes; resolved using chunk
+  [TextBox 8]: Learning Outcomes
+  [TextBox 9]: o  ML Regression Mastery: Hands-on XGBoost, Scikit-Learn pipelines, hyperparameter tuning, and Jobli
+  [TextBox 9]: o  Explainable AI (XAI): Implemented SHAP-style feature attribution making ML predictions interpreta
+  [TextBox 9]: o  Full-Stack Web Dev: Built a production-quality static web app using HTML5, Glassmorphism CSS3, Ja
+  [TextBox 9]: o  Data Engineering: Cleaned, encoded, and scaled real-world benchmark salary data for a supervised 
+  [TextBox 9]: o  GitHub Workflow: Practiced version control, branch management, and cloud static hosting on GitHub
+
+=== Slide 11 ===
+  [TextBox 2]: Future Enhancements
+  [TextBox 4]: 11 / 12
+  [TextBox 5]: o  Real Dataset Integration: Replace synthetic data with anonymized Glassdoor/LinkedIn salary datase
+  [TextBox 5]: o  REST API Backend: Deploy the XGBoost model as a FastAPI microservice enabling integration with en
+  [TextBox 5]: o  True SHAP Library: Replace client-side SHAP approximation with the official shap Python library f
+  [TextBox 5]: o  Resume Parser: Add NLP-based resume parsing (spaCy / HuggingFace) to auto-populate predictor fiel
+  [TextBox 5]: o  Mobile App: Develop a React Native mobile application with offline ML inference for salary benchm
+  [TextBox 5]: o  Company Dashboard: Build an HR analytics dashboard to compare internal salaries against predicted
+  [TextBox 5]: o  LLM Career Coach: Integrate Gemini / GPT to generate personalized career growth roadmaps based on
+
+=== Slide 12 ===
+  [TextBox 2]: THANK YOU!
+  [TextBox 4]: Employee Earnings Calculator (ML Salary Intelligence)
+  [TextBox 5]: Sanjana Chirutha  |  STU6817962b86d921746376235  |  AI & Machine Learning
+  [TextBox 6]: Edunet Foundation  o  AICTE  o  IBM SkillsBuild  o  6 Weeks Virtual Internship
+  [TextBox 8]: 12 / 12

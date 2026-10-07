@@ -1,0 +1,63 @@
+﻿
+--- Slide 6 ---
+  [TextBox 2] Para[0]: Methodology
+  [TextBox 4] Para[0]: 6 / 12
+  [TextBox 5] Para[0]: •  User Registration & Authentication: Users sign up and log in securely; JWT tokens are issued for stateless session management a
+  [TextBox 5] Para[1]: •  Role-Based Access Control: Three distinct roles — Buyer, Seller, Admin — each with specific permissions and protected API endpo
+  [TextBox 5] Para[2]: •  Seller Verification: An approval workflow ensures only verified sellers can create auction listings, preventing fraudulent acti
+  [TextBox 5] Para[3]: •  Auction Lifecycle Management: Create → Schedule → Activate → Live Bidding → End → Winner Declaration.
+  [TextBox 5] Para[4]: •  Real-Time Bidding Engine: WebSocket-powered live bid broadcasts; all connected clients receive instant updates whenever a new b
+  [TextBox 5] Para[5]: •  Anti-Sniping Timer: Countdown timer automatically extends when a bid is placed in the final seconds, preventing unfair last-mom
+  [TextBox 5] Para[6]: •  Data Persistence & Optimization: MySQL database with optimized queries for high-frequency bid reads/writes and complete audit l
+
+--- Slide 7 ---
+  [TextBox 2] Para[0]: Results
+  [TextBox 4] Para[0]: 7 / 12
+  [TextBox 5] Para[0]: Homepage
+  [TextBox 7] Para[0]: Login Page
+  [TextBox 9] Para[0]: Dashboard — Browse Auctions
+
+--- Slide 8 ---
+  [TextBox 2] Para[0]: Results (contd.)
+  [TextBox 4] Para[0]: 8 / 12
+  [TextBox 5] Para[0]: My Auctions — Seller Dashboard
+  [TextBox 7] Para[0]: Create Auction — Listing Form
+  [TextBox 9] Para[0]: Live Auction — Real-Time Bidding
+
+--- Slide 9 ---
+  [TextBox 2] Para[0]: Certificate
+  [TextBox 4] Para[0]: 9 / 12
+
+--- Slide 10 ---
+  [TextBox 2] Para[0]: Challenges & Learning Outcomes
+  [TextBox 4] Para[0]: 10 / 12
+  [TextBox 5] Para[0]: Challenges Faced
+  [TextBox 6] Para[0]: •  Real-Time Synchronization: Ensuring consistent bid data across multiple concurrent WebSocket connections without race condition
+  [TextBox 6] Para[1]: •  Timer Management: Implementing a reliable countdown timer with automatic reset logic synchronized across all connected clients.
+  [TextBox 6] Para[2]: •  Database Concurrency: Handling simultaneous bid writes to prevent data conflicts under high load.
+  [TextBox 6] Para[3]: •  Authentication Flow: Integrating JWT token lifecycle (issuance, validation, refresh, expiration) seamlessly with the frontend.
+  [TextBox 6] Para[4]: •  Seller Verification: Designing a multi-step approval process balancing security with user onboarding experience.
+  [TextBox 8] Para[0]: Learning Outcomes
+  [TextBox 9] Para[0]: •  Full-Stack Development: Gained hands-on experience designing and integrating React frontend with Spring Boot backend and MySQL 
+  [TextBox 9] Para[1]: •  WebSocket Protocol: Learned to implement bidirectional real-time communication using STOMP over WebSocket for live features.
+  [TextBox 9] Para[2]: •  Security Best Practices: Understood JWT-based authentication, RBAC implementation, and secure API design patterns.
+  [TextBox 9] Para[3]: •  Database Design: Learned normalized schema design and optimized queries for high-frequency transactional workloads.
+  [TextBox 9] Para[4]: •  Agile Development: Practiced iterative development, code reviews, and continuous testing throughout the project lifecycle.
+
+--- Slide 11 ---
+  [TextBox 2] Para[0]: Future Enhancements
+  [TextBox 4] Para[0]: 11 / 12
+  [TextBox 5] Para[0]: •  Payment Gateway Integration: Enable direct online payments via UPI, credit cards, and net banking for seamless post-auction tra
+  [TextBox 5] Para[1]: •  Mobile Application: Develop native Android and iOS apps for on-the-go auction participation with push notifications.
+  [TextBox 5] Para[2]: •  AI-Powered Recommendations: Suggest relevant auctions to users based on browsing history, interests, and past bidding behavior.
+  [TextBox 5] Para[3]: •  Cloud Deployment: Deploy on AWS or Azure for auto-scaling, high availability, and improved global performance.
+  [TextBox 5] Para[4]: •  Email & SMS Notifications: Automated alerts for bid updates, auction endings, winning notifications, and seller verification st
+  [TextBox 5] Para[5]: •  Fraud Detection System: AI-based anomaly detection to identify suspicious bidding patterns and fake user accounts.
+  [TextBox 5] Para[6]: •  Multi-Language Support: Internationalization support to expand platform reach to non-English speaking users.
+
+--- Slide 12 ---
+  [TextBox 2] Para[0]: THANK YOU!
+  [TextBox 4] Para[0]: Online Auction & Bidding Platform
+  [TextBox 5] Para[0]: Mohammad Rasha Rehman  |  B23CN098  |  CSE (Networks)
+  [TextBox 6] Para[0]: Blackbucks Education Pvt. Ltd.  •  Offline Internship  •  8 Weeks
+  [TextBox 8] Para[0]: 12 / 12
